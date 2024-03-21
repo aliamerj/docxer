@@ -2,9 +2,9 @@
   <img src="docxer.webp" alt="docxer logo" width="400"/>
 </p>
 
-# docxer
+# Docxer
 
-`docxer` is a Go library designed to facilitate DOCX document generation and manipulation. It provides a straightforward and efficient way to programmatically create and modify DOCX files directly from your Go applications.
+`Docxer` is a Go library designed to facilitate DOCX document generation and manipulation. It provides a straightforward and efficient way to programmatically create and modify DOCX files directly from your Go applications.
 ## Features
 
 - **Create DOCX Files:** Generate new DOCX documents and write basic, unstyled text into them. (Done)
