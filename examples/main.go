@@ -3,8 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
-
-	"github.com/aliamerj/docxer/docxer"
+	"github.com/aliamerj/docxer/pkg/docxer"
 )
 
 func main() {

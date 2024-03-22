@@ -1,6 +1,9 @@
 package docxer
 
-import "github.com/aliamerj/docxer/pkg/document"
+import (
+	"github.com/aliamerj/docxer/internal/document"
+	"github.com/aliamerj/docxer/internal/utils"
+)
 
 type docxer struct {
 	Title string
@@ -11,7 +14,7 @@ func NewDocx() *docxer {
 	return &docxer{}
 }
 func (d *docxer) CreateNewDocx(filePath string) (string, error) {
- if err := validateFilePath(filePath); err != nil {
+ if err :=utils.ValidateFilePath(filePath); err != nil {
 		return "", err
 	}
 
@@ -22,12 +25,3 @@ func (d *docxer) CreateNewDocx(filePath string) (string, error) {
 	}
 	return path, nil
 }
-func NewMarkdownDocx(filePath string, markdown string) (string, error){
- if err := validateFilePath(filePath); err != nil {
-		return "", err
-	}
-  // todo
-  return "", nil
-}
-
-

@@ -8,7 +8,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/aliamerj/docxer/pkg/template"
+	"github.com/aliamerj/docxer/internal/template"
 )
 
 //go:embed template/document.xml

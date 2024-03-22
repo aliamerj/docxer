@@ -1,4 +1,4 @@
-package docxer
+package utils
 
 import (
 	"os"
@@ -7,13 +7,13 @@ import (
 
 func TestValidateFilePath(t *testing.T) {
 	// Scenario 1: Test empty path
-	err := validateFilePath("")
+	err := ValidateFilePath("")
 	if err == nil {
 		t.Errorf("validateFilePath(\"\") = %v, want error", err)
 	}
 	// Scenario 2: Test non-existing path
 	nonExistPath := "path/that/does/not/exist"
-	err = validateFilePath(nonExistPath)
+	err = ValidateFilePath(nonExistPath)
 	if err == nil {
 		t.Errorf("validateFilePath(\"%s\") = %v, want error", nonExistPath, err)
 	}
@@ -23,7 +23,7 @@ func TestValidateFilePath(t *testing.T) {
 	tempDir := os.TempDir()
 	defer os.RemoveAll(tempDir)
 
-	err = validateFilePath(tempDir)
+	err = ValidateFilePath(tempDir)
 	if err != nil {
 		t.Errorf("validateFilePath(\"%s\") = %v, want no error", tempDir, err)
 	}
@@ -38,7 +38,7 @@ func TestValidateFilePath(t *testing.T) {
 	defer os.Remove(tempFilePath)
 	tempFile.Close()
 
-	err = validateFilePath(tempFilePath)
+	err = ValidateFilePath(tempFilePath)
 	if err == nil {
 		t.Errorf("validateFilePath(\"%s\") = %v, want error", tempFilePath, err)
 	}

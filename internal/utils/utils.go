@@ -1,11 +1,11 @@
-package docxer
+package utils
 
 import (
 	"fmt"
 	"os"
 )
 
-func validateFilePath(dirPath string) error {
+func ValidateFilePath(dirPath string) error {
 	if dirPath == "" {
 		return fmt.Errorf("file path cannot be empty")
 	}
