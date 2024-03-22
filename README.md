@@ -37,7 +37,7 @@ go get github.com/aliamerj/docxer
 
 ```go
 // Initialize a new docxer instance
-dx := docxer.New()
+dx := docxer.NewDocx()
 // Set the title and body of your document
 dx.Title = "My Title"
 dx.Body = "This is the document body."

@@ -24,5 +24,8 @@ jobs:
     - name: Build
       run: go build -v ./...
 
+    - name: Clean
+    - run: go clean -testcache
+
     - name: Test
       run: go test -v ./...

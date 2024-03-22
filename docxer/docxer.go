@@ -7,13 +7,27 @@ type docxer struct {
 	Body  string
 }
 
-func New() *docxer {
+func NewDocx() *docxer {
 	return &docxer{}
 }
 func (d *docxer) CreateNewDocx(filePath string) (string, error) {
-	path, err := document.CreateNewDocx(".", d.Title, d.Body)
+ if err := validateFilePath(filePath); err != nil {
+		return "", err
+	}
+
+
+	path, err := document.CreateNewDocx(filePath, d.Title, d.Body)
 	if err != nil {
 		return "", err
 	}
 	return path, nil
 }
+func NewMarkdownDocx(filePath string, markdown string) (string, error){
+ if err := validateFilePath(filePath); err != nil {
+		return "", err
+	}
+  // todo
+  return "", nil
+}
+
+
