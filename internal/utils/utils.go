@@ -9,7 +9,6 @@ func ValidateFilePath(dirPath string) error {
 	if dirPath == "" {
 		return fmt.Errorf("file path cannot be empty")
 	}
-
 	// Check if the path exists and is a directory
 	fileInfo, err := os.Stat(dirPath)
 	if err != nil {
