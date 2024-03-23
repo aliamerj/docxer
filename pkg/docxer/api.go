@@ -14,10 +14,9 @@ func NewDocx() *docxer {
 	return &docxer{}
 }
 func (d *docxer) CreateNewDocx(filePath string) (string, error) {
- if err :=utils.ValidateFilePath(filePath); err != nil {
+	if err := utils.ValidateFilePath(filePath); err != nil {
 		return "", err
 	}
-
 
 	path, err := document.CreateNewDocx(filePath, d.Title, d.Body)
 	if err != nil {
