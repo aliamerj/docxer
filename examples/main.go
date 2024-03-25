@@ -26,7 +26,8 @@ func main() {
 #### Heading level 4 
 ##### Heading level 5
 ###### Heading level 6 
-I really like using Markdown.
+I really like using Markdown in Docxer.
+you can make the text **Bold** , *Italic* or ***both***
   `
 	path2, err2 := docxer.CreateMarkdownDocx(".", text)
 	if err != nil {
