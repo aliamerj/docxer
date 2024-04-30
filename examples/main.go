@@ -36,7 +36,30 @@ func main() {
 	}
 	fmt.Println(path2)
 
-	dox := docxer.Replace("./new_file.docx")
+	dox := docxer.Placeholder("./new_file.docx")
 	dox.Text(map[string]string{"name": "Ali", "job": "Software Engineer"})
+	replacements := map[string]string{
+		"INVOICE_NUMBER": "123456",
+		"DATE":           "2024-04-30",
+		"TOTAL":          "150.00",
+	}
+	if err := dox.Text(replacements); err != nil {
+		log.Fatal(err)
+	}
+
+	items := map[string]interface{}{
+		"items": []map[string]string{
+			{"NAME": "Product 1", "QUANTITY": "2", "PRICE": "30.00"},
+			{"NAME": "Product 2", "QUANTITY": "1", "PRICE": "90.00"},
+			{"NAME": "Product 3", "QUANTITY": "1", "PRICE": "90.00"},
+			{"NAME": "Product 4", "QUANTITY": "1", "PRICE": "90.00"},
+		},
+		"products": []map[string]string{
+			{"NAME": "Product x1", "QUANTITY": "200", "PRICE": "30.00"},
+			{"NAME": "Product x2", "QUANTITY": "100", "PRICE": "90.00"},
+			{"NAME": "Product x2x3", "QUANTITY": "100", "PRICE": "90.00"},
+		},
+	}
+	dox.Loop(items)
 
 }
