@@ -8,32 +8,257 @@ import (
 	"testing"
 )
 
-func TestUpdateDocx(t *testing.T) {
-	// Create a temporary directory
-	tempDir, err := os.MkdirTemp("", "testUpdateDocx")
+func TestTextPlaceholderWriter_BasicReplacement(t *testing.T) {
+	// Setup test input and output
+	inputContent := "Hello {{NAME}}, welcome to {{PLACE}}."
+	replacements := map[string]string{
+		"NAME":  "John Doe",
+		"PLACE": "GoLand",
+	}
+	expectedOutput := "Hello John Doe, welcome to GoLand."
+
+	// Create the placeholder writer action
+	action := TextPlaceholderWriter(replacements)
+	docxWriter := action()
+
+	// Execute the writer
+	outputContent := docxWriter(inputContent)
+
+	// Verify the output
+	if outputContent != expectedOutput {
+		t.Errorf("Expected '%s', got '%s'", expectedOutput, outputContent)
+	}
+}
+
+func TestTextPlaceholderWriter_NoReplacements(t *testing.T) {
+	// Setup test input and output
+	inputContent := "Hello there."
+	replacements := map[string]string{
+		"UNUSED": "Unused",
+	}
+	expectedOutput := "Hello there."
+
+	// Create the placeholder writer action
+	action := TextPlaceholderWriter(replacements)
+	docxWriter := action()
+
+	// Execute the writer
+	outputContent := docxWriter(inputContent)
+
+	// Verify the output
+	if outputContent != expectedOutput {
+		t.Errorf("Expected '%s', got '%s'", expectedOutput, outputContent)
+	}
+}
+
+func TestTextPlaceholderWriter_MultipleOccurrences(t *testing.T) {
+	// Setup test input and output
+	inputContent := "Hello {{NAME}}, you are {{NAME}} right?"
+	replacements := map[string]string{
+		"NAME": "Alice",
+	}
+	expectedOutput := "Hello Alice, you are Alice right?"
+
+	// Create the placeholder writer action
+	action := TextPlaceholderWriter(replacements)
+	docxWriter := action()
+
+	// Execute the writer
+	outputContent := docxWriter(inputContent)
+
+	// Verify the output
+	if outputContent != expectedOutput {
+		t.Errorf("Expected '%s', got '%s'", expectedOutput, outputContent)
+	}
+}
+
+func TestTextPlaceholderWriter_EmptyStrings(t *testing.T) {
+	// Setup test input and output
+	inputContent := "Hi {{NAME}}!"
+	replacements := map[string]string{
+		"NAME": "",
+	}
+	expectedOutput := "Hi !"
+
+	// Create the placeholder writer action
+	action := TextPlaceholderWriter(replacements)
+	docxWriter := action()
+
+	// Execute the writer
+	outputContent := docxWriter(inputContent)
+
+	// Verify the output
+	if outputContent != expectedOutput {
+		t.Errorf("Expected '%s', got '%s'", expectedOutput, outputContent)
+	}
+}
+
+func TestLoopPlaceholderWriter_BasicLoop(t *testing.T) {
+	// Setup test input and output
+	inputContent := "Items:\n{{#each items}}- {{NAME}}, ${{PRICE}}\n{{/each}}"
+	data := map[string]interface{}{
+		"items": []map[string]string{
+			{"NAME": "Item 1", "PRICE": "10"},
+			{"NAME": "Item 2", "PRICE": "20"},
+		},
+	}
+	expectedOutput := "Items:\n- Item 1, $10\n- Item 2, $20\n"
+
+	// Create the placeholder writer action
+	action := LoopPlaceholderWriter(data)
+	docxWriter := action()
+
+	// Execute the writer
+	outputContent := docxWriter(inputContent)
+
+	// Verify the output
+	if outputContent != expectedOutput {
+		t.Errorf("Expected '%s', got '%s'", expectedOutput, outputContent)
+	}
+}
+
+func TestLoopPlaceholderWriter_MultipleLoops(t *testing.T) {
+	inputContent := "Items:\n{{#each items}}- {{NAME}}, ${{PRICE}}\n{{/each}}Services:\n{{#each services}}- {{SERVICE}}: ${{COST}}\n{{/each}}"
+	data := map[string]interface{}{
+		"items": []map[string]string{
+			{"NAME": "Item 1", "PRICE": "10"},
+			{"NAME": "Item 2", "PRICE": "20"},
+		},
+		"services": []map[string]string{
+			{"SERVICE": "Delivery", "COST": "5"},
+			{"SERVICE": "Gift Wrap", "COST": "2"},
+		},
+	}
+	expectedOutput := "Items:\n- Item 1, $10\n- Item 2, $20\nServices:\n- Delivery: $5\n- Gift Wrap: $2\n"
+
+	action := LoopPlaceholderWriter(data)
+	docxWriter := action()
+
+	outputContent := docxWriter(inputContent)
+
+	if outputContent != expectedOutput {
+		t.Errorf("Expected '%s', got '%s'", expectedOutput, outputContent)
+	}
+}
+
+func TestLoopPlaceholderWriter_MissingMarkers(t *testing.T) {
+	inputContent := "There are no loop markers here."
+	data := map[string]interface{}{
+		"items": []map[string]string{
+			{"NAME": "Item 1", "PRICE": "10"},
+		},
+	}
+	expectedOutput := "There are no loop markers here."
+
+	action := LoopPlaceholderWriter(data)
+	docxWriter := action()
+
+	outputContent := docxWriter(inputContent)
+
+	if outputContent != expectedOutput {
+		t.Errorf("Expected '%s', got '%s'", expectedOutput, outputContent)
+	}
+}
+
+func TestLoopPlaceholderWriter_IncorrectDataFormat(t *testing.T) {
+	inputContent := "Items:\n{{#each items}}- {{NAME}}, ${{PRICE}}\n{{/each}}"
+	data := map[string]interface{}{
+		"items": "Not a slice of maps",
+	}
+	expectedOutput := "Items:\n{{#each items}}- {{NAME}}, ${{PRICE}}\n{{/each}}"
+
+	action := LoopPlaceholderWriter(data)
+	docxWriter := action()
+
+	outputContent := docxWriter(inputContent)
+
+	if outputContent != expectedOutput {
+		t.Errorf("Expected '%s', got '%s'", expectedOutput, outputContent)
+	}
+}
+
+func TestUpdateDocx_Basic(t *testing.T) {
+	// Setup a temporary directory
+	tempDir, err := os.MkdirTemp("", "testUpdateDocx_Basic")
 	if err != nil {
 		t.Fatalf("Failed to create temp dir: %v", err)
 	}
 	defer os.RemoveAll(tempDir)
 
-	// Prepare a test DOCX file with placeholders
+	// Create a test DOCX with placeholders
 	testFilePath := tempDir + "/test.docx"
 	createTestDocx(testFilePath, "Original content with {{TITLE}} and {{BODY}}")
 
-	// Define replacements
-	replacements := map[string]string{
+	// Create an action to replace placeholders
+	action := TextPlaceholderWriter(map[string]string{
 		"TITLE": "Updated Title",
 		"BODY":  "Updated Body",
-	}
+	})
 
-	// Run the UpdateDocx function
-	err = UpdateDocx(testFilePath, replacements)
-	if err != nil {
+	// Call UpdateDocx with the action
+	if err := UpdateDocx(testFilePath, action); err != nil {
 		t.Errorf("UpdateDocx returned an error: %v", err)
 	}
 
-	// Verify file content
+	// Verify the content
 	verifyUpdatedDocx(t, testFilePath, "Original content with Updated Title and Updated Body")
+}
+
+func TestUpdateDocx_MultipleReplacements(t *testing.T) {
+	tempDir, err := os.MkdirTemp("", "testUpdateDocx_MultipleReplacements")
+	if err != nil {
+		t.Fatalf("Failed to create temp dir: %v", err)
+	}
+	defer os.RemoveAll(tempDir)
+
+	testFilePath := tempDir + "/test.docx"
+	createTestDocx(testFilePath, "Info: {{NAME}}, Age: {{AGE}}")
+
+	action := TextPlaceholderWriter(map[string]string{
+		"NAME": "Alice",
+		"AGE":  "30",
+	})
+
+	if err := UpdateDocx(testFilePath, action); err != nil {
+		t.Errorf("UpdateDocx returned an error: %v", err)
+	}
+
+	expectedContent := "Info: Alice, Age: 30"
+	verifyUpdatedDocx(t, testFilePath, expectedContent)
+
+}
+
+func TestUpdateDocx_NoReplacements(t *testing.T) {
+	tempDir, err := os.MkdirTemp("", "testUpdateDocx_NoReplacements")
+	if err != nil {
+		t.Fatalf("Failed to create temp dir: %v", err)
+	}
+	defer os.RemoveAll(tempDir)
+
+	testFilePath := tempDir + "/test.docx"
+	createTestDocx(testFilePath, "Hello there.")
+
+	action := TextPlaceholderWriter(map[string]string{
+		"UNUSED": "Nothing",
+	})
+
+	if err := UpdateDocx(testFilePath, action); err != nil {
+		t.Errorf("UpdateDocx returned an error: %v", err)
+	}
+
+	verifyUpdatedDocx(t, testFilePath, "Hello there.")
+}
+
+func TestUpdateDocx_FileDoesNotExist(t *testing.T) {
+	nonexistentFile := "/path/to/nonexistent.docx"
+	action := TextPlaceholderWriter(map[string]string{
+		"TITLE": "Title",
+	})
+
+	err := UpdateDocx(nonexistentFile, action)
+	if err == nil {
+		t.Errorf("Expected error for non-existent file")
+	}
 }
 
 // createTestDocx creates a simple DOCX file with the specified content

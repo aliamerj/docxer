@@ -17,7 +17,7 @@ type holder struct {
 	filePath string
 }
 
-func Replace(filePath string) *holder {
+func Placeholder(filePath string) *holder {
 	return &holder{filePath: filePath}
 }
 
@@ -52,9 +52,23 @@ func (h *holder) Text(replacements map[string]string) error {
 	if err := utils.ValidateFilePath(dirPath); err != nil {
 		return err
 	}
-	err := placeholder.UpdateDocx(h.filePath, replacements)
+	action := placeholder.TextPlaceholderWriter(replacements)
+	err := placeholder.UpdateDocx(h.filePath, action)
 	if err != nil {
 		return err
 	}
+	return nil
+}
+func (h *holder) Loop(loop map[string]interface{}) error {
+	dirPath := filepath.Dir(h.filePath)
+	if err := utils.ValidateFilePath(dirPath); err != nil {
+		return err
+	}
+	action := placeholder.LoopPlaceholderWriter(loop)
+	err := placeholder.UpdateDocx(h.filePath, action)
+	if err != nil {
+		return err
+	}
+
 	return nil
 }
