@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"
+  xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14">
+  <w:docDefaults>
+    <w:rPrDefault>
+      <w:rPr>
+        <w:rFonts w:ascii="Liberation Serif" w:hAnsi="Liberation Serif"
+          w:eastAsia="Noto Serif CJK SC" w:cs="Lohit Devanagari" />
+        <w:kern w:val="2" />
+        <w:sz w:val="24" />
+        <w:szCs w:val="24" />
+        <w:lang w:val="en-US" w:eastAsia="zh-CN" w:bidi="hi-IN" />
+      </w:rPr>
+    </w:rPrDefault>
+    <w:pPrDefault>
+      <w:pPr>
+        <w:widowControl />
+        <w:suppressAutoHyphens w:val="true" />
+      </w:pPr>
+    </w:pPrDefault>
+  </w:docDefaults>
+  <!-- START:Title-->
+  <w:style w:type="paragraph" w:styleId="Title">
+    <w:name w:val="Title" />
+    <w:basedOn w:val="Heading" />
+    <w:next w:val="TextBody" />
+    <w:qFormat />
+    <w:pPr>
+      <w:jc w:val="center" />
+    </w:pPr>
+    <w:rPr>
+      <w:b />
+      <w:bCs />
+      <w:sz w:val="56" />
+      <w:szCs w:val="56" />
+    </w:rPr>
+  </w:style>
+  <!-- END:Title-->
+  <!-- START:Heading1-->
+  <w:style w:type="paragraph" w:styleId="Heading1">
+    <w:name w:val="Heading 1" />
+    <w:basedOn w:val="Normal" />
+    <w:next w:val="Normal" />
+    <w:qFormat />
+    <w:pPr>
+      <w:jc w:val="left" />
+    </w:pPr>
+    <w:rPr>
+      <w:b />
+      <w:bCs />
+      <w:sz w:val="44" />
+      <w:szCs w:val="44" />
+    </w:rPr>
+  </w:style>
+  <!-- End:Heading1-->
+  <!-- START:Heading2-->
+  <w:style w:type="paragraph" w:styleId="Heading2">
+    <w:name w:val="Heading 2" />
+    <w:basedOn w:val="Normal" />
+    <w:next w:val="Normal" />
+    <w:qFormat />
+    <w:pPr>
+      <w:jc w:val="left" />
+    </w:pPr>
+    <w:rPr>
+      <w:b />
+      <w:bCs />
+      <w:sz w:val="36" />
+      <w:szCs w:val="36" />
+    </w:rPr>
+  </w:style>
+  <!-- END:Heading2-->
+  <!-- START:Heading3-->
+  <w:style w:type="paragraph" w:styleId="Heading3">
+    <w:name w:val="Heading 3" />
+    <w:basedOn w:val="Normal" />
+    <w:next w:val="Normal" />
+    <w:qFormat />
+    <w:pPr>
+      <w:jc w:val="left" />
+    </w:pPr>
+    <w:rPr>
+      <w:b />
+      <w:bCs />
+      <w:sz w:val="32" />
+      <w:szCs w:val="32" />
+    </w:rPr>
+  </w:style>
+  <!-- END:Heading3-->
+  <!-- START:Heading4-->
+  <w:style w:type="paragraph" w:styleId="Heading4">
+    <w:name w:val="Heading 4" />
+    <w:basedOn w:val="Normal" />
+    <w:next w:val="Normal" />
+    <w:qFormat />
+    <w:pPr>
+      <w:jc w:val="left" />
+    </w:pPr>
+    <w:rPr>
+      <w:b />
+      <w:bCs />
+      <w:sz w:val="28" />
+      <w:szCs w:val="28" />
+    </w:rPr>
+  </w:style>
+  <!-- END:Heading4-->
+  <!-- START:Heading5-->
+  <w:style w:type="paragraph" w:styleId="Heading5">
+    <w:name w:val="Heading 5" />
+    <w:basedOn w:val="Normal" />
+    <w:next w:val="Normal" />
+    <w:qFormat />
+    <w:pPr>
+      <w:jc w:val="left" />
+    </w:pPr>
+    <w:rPr>
+      <w:b />
+      <w:bCs />
+      <w:sz w:val="26" />
+      <w:szCs w:val="26" />
+    </w:rPr>
+  </w:style>
+  <!-- END:Heading5-->
+  <!-- START:Heading6 -->
+  <w:style w:type="paragraph" w:styleId="Heading6">
+    <w:name w:val="Heading 6" />
+    <w:basedOn w:val="Normal" />
+    <w:next w:val="Normal" />
+    <w:qFormat />
+    <w:pPr>
+      <w:jc w:val="left" />
+    </w:pPr>
+    <w:rPr>
+      <w:b />
+      <w:bCs />
+      <w:sz w:val="24" />
+      <w:szCs w:val="24" />
+    </w:rPr>
+  </w:style>
+  <!-- END:Heading6-->
+  <!-- START:Normal text-->
+  <w:style w:type="paragraph" w:styleId="Normal">
+    <w:name w:val="Normal" />
+    <w:basedOn w:val="Normal" />
+    <w:next w:val="Normal" />
+    <w:qFormat />
+    <w:pPr>
+      <w:spacing w:after="200" w:line="240" w:lineRule="auto" />
+      <w:ind w:left="0" w:right="0" />
+      <w:jc w:val="left" />
+    </w:pPr>
+    <w:rPr>
+      <w:rFonts w:ascii="Calibri" w:hAnsi="Calibri" />
+      <w:sz w:val="22" />
+    </w:rPr>
+  </w:style>
+  <!-- End:Normal text-->
+  <!-- START:Unordered Lists--><!-- END:Unordered Lists-->
+  <!-- START:Code Blocks--><!-- END:Code Blocks-->
+  <!-- START:Images--><!-- END:Images-->
+  <!-- START:Horizontal Rules--><!-- END:Horizontal Rules-->
+  <!-- START:Links--><!-- END:Links-->
+  <!-- START:Escaping Characters--><!-- END:Escaping Characters-->
+  <!-- START:Tables--><!-- END:Tables-->
+  <!-- START:Strikethrough--><!-- END:Strikethrough-->
+  <!-- START:Task Lists--><!-- END:Task Lists-->
+</w:styles>

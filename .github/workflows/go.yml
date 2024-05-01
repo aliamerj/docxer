@@ -2,7 +2,7 @@ name: Go
 
 on:
   push:
-    branches: [ "main", "basic_write" ]
+    branches: [ "main", "basic_write","markdown" ]
   pull_request:
     branches: [ "main" ]
 
