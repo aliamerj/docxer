@@ -8,13 +8,12 @@
 ## Features
 
 - **Create DOCX Files:** Generate new DOCX documents and write basic, unstyled text into them. (Done)
-- **Text Styling and Markers:** Enhance your text with rich styling options and utilize markers to apply consistent styles.
+- **Text Styling and Markers:** Enhance your text with styling options and utilize markers to apply consistent styles.
 - **Template Processing:** Embed placeholders in your templates and replace them dynamically with various content types, supporting loops and conditional logic.
 - **Document Manipulation:** Insert, delete, or modify elements like paragraphs, tables, images, and more.
 - **Format Conversions:**
   - **DOCX to PDF:** Convert DOCX files into PDF format, preserving layout and content.
   - **DOCX to HTML:** Transform DOCX documents into HTML for web publication.
-  - **DOCX to XML:** Export DOCX content to XML for data interchange or processing.
 - **Markdown Support:** Convert Markdown text into styled DOCX content, maintaining the formatting.
 - **Merge Documents:** Combine multiple DOCX files into a single document with configurable section breaks.
 
