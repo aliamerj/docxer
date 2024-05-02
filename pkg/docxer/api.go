@@ -72,3 +72,18 @@ func (h *holder) Loop(loop map[string]interface{}) error {
 
 	return nil
 }
+
+func (h *holder) Image(imagePath, imageId string, widthEMU, heightEMU int) error {
+	dirPath := filepath.Dir(h.filePath)
+	if err := utils.ValidateFilePath(dirPath); err != nil {
+		return err
+	}
+	action := placeholder.ImagePlaceholderWriter(imagePath, imageId, widthEMU, heightEMU)
+	err := placeholder.UpdateDocx(h.filePath, action)
+	if err != nil {
+		return err
+	}
+
+	return nil
+
+}
